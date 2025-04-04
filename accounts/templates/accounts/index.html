@@ -1,0 +1,18 @@
+{% block body %}
+    {% if request.user.is_authenticated %}
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="">حساب کاربری</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">باشگاه کاربران ویژه</a>
+            </li>
+        </ul>
+    {% else %}
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="">ورود/ثبت‌نام</a>
+            </li>
+        </ul>
+    {% endif %}
+{% endblock %}

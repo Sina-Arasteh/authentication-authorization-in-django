@@ -107,7 +107,7 @@ class CustomAuthenticationForm(AuthenticationForm):
             "autofocus": True,
             "class": "form-control"
         }),
-        error_messages={"required": "رمز عبور الزامی می‌باشد."}
+        error_messages={"required": "نام کاربری الزامی می‌باشد."}
     )
     password = forms.CharField(
         label="رمز عبور",

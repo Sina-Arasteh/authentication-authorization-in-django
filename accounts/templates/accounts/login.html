@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% if request.user.is_authenticated %}
+  <script>window.location.href='{% url "accounts:index" %}';</script>
+{% endif %}
+
 {% block body %}
   {% include "anonymoususer_nav.html" %}
 

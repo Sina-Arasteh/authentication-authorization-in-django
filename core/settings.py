@@ -126,3 +126,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 FIRST_DAY_OF_WEEK = 6
+
+LOGIN_REDIRECT_URL = "accounts:index"
+
+LOGOUT_REDIRECT_URL = "accounts:index"

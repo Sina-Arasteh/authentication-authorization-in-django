@@ -101,11 +101,22 @@ class SignUpForm(forms.Form):
 
 
 class CustomAuthenticationForm(AuthenticationForm):
-    username = UsernameField(label="نام کاربری", widget=forms.TextInput(attrs={"autofocus": True, "class": "form-control"}))
+    username = UsernameField(
+        label="نام کاربری",
+        widget=forms.TextInput(attrs={
+            "autofocus": True,
+            "class": "form-control"
+        }),
+        error_messages={"required": "رمز عبور الزامی می‌باشد."}
+    )
     password = forms.CharField(
         label="رمز عبور",
         strip=False,
-        widget=forms.PasswordInput(attrs={"autocomplete": "current-password", "class": "form-control"}),
+        widget=forms.PasswordInput(attrs={
+            "autocomplete": "current-password",
+            "class": "form-control"
+        }),
+        error_messages={"required": "رمز عبور الزامی می‌باشد."}
     )
 
     error_messages = {

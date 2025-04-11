@@ -9,7 +9,7 @@ urlpatterns = [
     path(
         'login/',
         auth_views.LoginView.as_view(
-            template_name="accounts",
+            template_name="accounts/login.html",
             authentication_form=forms.CustomAuthenticationForm
         ),
         name="login"

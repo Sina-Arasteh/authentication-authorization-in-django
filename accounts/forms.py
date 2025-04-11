@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.contrib.auth.password_validation import validate_password
 import re
+from django.contrib.auth.forms import AuthenticationForm, UsernameField
 
 
 class SignUpForm(forms.Form):
@@ -97,3 +98,17 @@ class SignUpForm(forms.Form):
         if password_confirmation != password:
             raise ValidationError("رمزعبور صحیح نمی‌باشد.")
         return password_confirmation
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    username = UsernameField(label="نام کاربری", widget=forms.TextInput(attrs={"autofocus": True, "class": "form-control"}))
+    password = forms.CharField(
+        label="رمز عبور",
+        strip=False,
+        widget=forms.PasswordInput(attrs={"autocomplete": "current-password", "class": "form-control"}),
+    )
+
+    error_messages = {
+        "invalid_login": "لطفاً نام کاربری و رمز عبور صحیح وارد کنید. توجه داشته باشید که هردو فیلد ممکن است به بزرگی و کوچکی حروف حساس باشند.",
+        "inactive": "این حساب کاربری غیر فعال شده است.",
+    }

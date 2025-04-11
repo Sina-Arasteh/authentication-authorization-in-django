@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block body %}
+  {% include "anonymoususer_nav.html" %}
+
+  <form action="" method="post" novalidate>
+    {% csrf_token %}
+
+    <div class="bg-warning border border-2 rounded border-dark" style="margin: 3% 20% 0px;">
+      <div class="p-3">
+        <h3 class="text-center">فرم ثبت‌نام</h3>
+      </div>
+
+      <div class="p-4 border-top border-dark">
+        {% for field in signup_form %}
+          <div class="row mb-3">
+            <label for="{{ field.id_for_label }}" class="col-sm-2 col-form-label">{{ field.label }}</label>
+            <div class="col-sm-10">
+              {{ field }}
+              {% if field.id_for_label == "id_password" %}
+                <div class="form-text">
+                  <p class="text-primary-emphasis small">رمز عبور باید حداقل 8 کاراکتر و نباید تنها شامل اعداد باشد. همچنین رمز عبور نباید تشابه بالایی با نام کاربری یا ایمیل‌تان داشته باشد. همچنین رمز عبورنباید جزو رمز عبورهای رایج باشد.</p>
+                </div>
+              {% endif %}
+              <ul class="form-text text-danger-emphasis">
+                {% for error in field.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        {% endfor %}
+
+        <div class="d-grid gap-2 mt-4">
+          <button type="submit" class="btn btn-dark">ثبت‌نام</button>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}

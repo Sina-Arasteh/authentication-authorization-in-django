@@ -7,7 +7,8 @@ import re
 
 
 class SignUpForm(forms.Form):
-    username = forms.CharField(
+    username = forms.CharField( 
+        label="نام کاربری",
         max_length=150,
         min_length=4,
         error_messages={
@@ -24,25 +25,31 @@ class SignUpForm(forms.Form):
         ]
     )
     email = forms.EmailField(
+        label="ایمیل",
         error_messages={
             "required": "ایمیل الزامی می‌باشد.",
             "invalid": "آدرس ایمیل نامعتبر می‌باشد.",
         }
     )
     password = forms.CharField(
-        min_length=8,
+        label="رمز عبور",
         widget=forms.PasswordInput,
         error_messages={
             "required": "رمز عبور الزامی می‌باشد.",
-            "min_length": "رمز عبور باید حداقل 8 کاراکتر باشد.",
         }
     )
     password_confirmation = forms.CharField(
+        label="تکرار رمز عبور",
         widget=forms.PasswordInput,
         error_messages={
             "required": "تکرار رمز عبور الزامی می‌باشد.",
         }
     )
+
+    username.widget.attrs.update({'class': 'form-control'})
+    email.widget.attrs.update({'class': 'form-control'})
+    password.widget.attrs.update({'class': 'form-control'})
+    password_confirmation.widget.attrs.update({'class': 'form-control'})
 
     def clean_username(self):
         """Prevents the duplication of username."""
@@ -82,8 +89,11 @@ class SignUpForm(forms.Form):
 
     def clean_password_confirmation(self):
         """Checks the similarity of the password_confirmation field to the password field"""
-        password = self.cleaned_data['password']
         password_confirmation = self.cleaned_data['password_confirmation']
+        try:
+            password = self.cleaned_data['password']
+        except:
+            password = None
         if password_confirmation != password:
             raise ValidationError("رمزعبور صحیح نمی‌باشد.")
         return password_confirmation

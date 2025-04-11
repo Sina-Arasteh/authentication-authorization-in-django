@@ -1,29 +1,22 @@
 {% extends "base.html" %}
 
 {% block body %}
-    {% if request.user.is_authenticated %}
-        <ul class="nav nav-tabs justify-content-center bg-primary">
-            <li class="nav-item">
-                <a class="nav-link link-light" href="">تغییر رمز عبور</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link link-light" href="">باشگاه کاربران ویژه</a>
-            </li>
-        </ul>
-    {% else %}
-        <ul class="nav nav-tabs justify-content-center bg-primary">
-            <li class="nav-item">
-                <a class="nav-link link-light" href="">ورود</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link link-light" href="">ثبت‌نام</a>
-            </li>
-        </ul>
-    {% endif %}
+  {% if request.user.is_authenticated %}
+    <ul class="nav nav-tabs justify-content-center bg-primary">
+      <li class="nav-item">
+        <a class="nav-link link-light" href="">تغییر رمز عبور</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link link-light" href="">باشگاه کاربران ویژه</a>
+      </li>
+    </ul>
+  {% else %}
+    {% include "anonymoususer_nav.html" %}
+  {% endif %}
     
-    <div class="position-fixed" style="height: 80vh; width: 100vw; display: flex; justify-content: center; align-items: center;">
-        <div class="text-center text-primary-emphasis">
-            <h1>سیستم احراز هویت<br>و<br>سطح دسترسی</h1>
-        </div>
+  <div class="position-fixed" style="height: 80vh; width: 100vw; display: flex; justify-content: center; align-items: center;">
+    <div class="text-center text-primary-emphasis">
+      <h1>سیستم احراز هویت<br>و<br>سطح دسترسی</h1>
     </div>
+  </div>
 {% endblock %}

@@ -1,6 +1,15 @@
 <ul class="nav nav-tabs justify-content-center bg-primary">
   <li class="nav-item">
-    <a class="nav-link link-light" href="">تغییر رمز عبور</a>
+    <a class="nav-link link-light" href="{% url 'accounts:index' %}">صفحه اصلی</a>
+  </li>
+  <li class="nav-item dropdown dropdown-center">
+    <a class="nav-link dropdown-toggle link-light" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">حساب کاربری</a>
+    <ul class="dropdown-menu bg-primary text-end">
+      <li><a class="dropdown-item text-warning" href="#">تغییر رمز عبور</a></li>
+      <li><a class="dropdown-item text-warning" href="#">تغییر نوع حساب کاربری</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item text-warning" href="#">خروج از حساب کاربری</a></li>
+    </ul>
   </li>
   <li class="nav-item">
     <a class="nav-link link-light" href="">باشگاه کاربران ویژه</a>

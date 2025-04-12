@@ -4,7 +4,11 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.contrib.auth.password_validation import validate_password
 import re
-from django.contrib.auth.forms import AuthenticationForm, UsernameField
+from django.contrib.auth.forms import (
+    AuthenticationForm,
+    UsernameField,
+    PasswordChangeForm,
+)
 
 
 class SignUpForm(forms.Form):
@@ -123,3 +127,22 @@ class CustomAuthenticationForm(AuthenticationForm):
         "invalid_login": "لطفاً نام کاربری و رمز عبور صحیح وارد کنید. توجه داشته باشید که هردو فیلد ممکن است به بزرگی و کوچکی حروف حساس باشند.",
         "inactive": "این حساب کاربری غیر فعال شده است.",
     }
+
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    error_messages = {
+        "password_mismatch": "تکرار رمز عبور صحیح نیست.",
+        "password_incorrect": "رمز عبور اشتباه است.",
+    }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['old_password'].label = "رمز عبور فعلی"
+        self.fields['new_password1'].label = "رمز عبور جدید"
+        self.fields['new_password2'].label = "تکرار رمز عبور جدید"
+        self.fields['old_password'].error_messages = {"required": "این فیلد الزامی می‌باشد."}
+        self.fields['new_password1'].error_messages = {"required": "این فیلد الزامی می‌باشد."}
+        self.fields['new_password2'].error_messages = {"required": "این فیلد الزامی می‌باشد."}
+        self.fields['old_password'].widget.attrs.update({'class': 'form-control'})
+        self.fields['new_password1'].widget.attrs.update({'class': 'form-control'})
+        self.fields['new_password2'].widget.attrs.update({'class': 'form-control'})

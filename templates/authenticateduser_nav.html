@@ -8,7 +8,12 @@
       <li><a class="dropdown-item text-warning" href="#">تغییر رمز عبور</a></li>
       <li><a class="dropdown-item text-warning" href="#">تغییر نوع حساب کاربری</a></li>
       <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item text-warning" href="#">خروج از حساب کاربری</a></li>
+      <li>
+        <form action="{% url 'accounts:logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn text-warning">خروج از حساب کاربری</button>
+        </form>
+      </li>
     </ul>
   </li>
   <li class="nav-item">

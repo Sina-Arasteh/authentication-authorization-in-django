@@ -9,6 +9,7 @@ def index_page(request):
     """Renders the index page."""
     return render(request, 'accounts/index.html')
 
+
 def signup(request):
     if request.method == "POST":
         signup_form = forms.SignUpForm(request.POST)
@@ -18,7 +19,7 @@ def signup(request):
                 email = request.POST['email'],
                 password = request.POST['password']
             )
-            return HttpResponseRedirect(reverse("accounts:login"))
+            return HttpResponseRedirect(reverse("accounts:successfulsignup"))
     else:
         signup_form = forms.SignUpForm()
     context = {
@@ -26,5 +27,10 @@ def signup(request):
     }
     return render(request, "accounts/signup.html", context)
 
+
 def login(request):
     return render(request, "accounts/login.html")
+
+
+def signup_successful(request):
+    return render(request, "accounts/successful_signup.html")

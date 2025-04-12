@@ -15,4 +15,5 @@ urlpatterns = [
         name="login"
     ),
     path('logout/', auth_views.LogoutView.as_view(), name="logout"),
+    path('signup-successful', views.signup_successful, name="successfulsignup")
 ]

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% if request.user.is_authenticated %}
+  <script>window.location.href='{% url "accounts:index" %}';</script>
+{% endif %}
+
+{% block body %}
+  {% include "anonymoususer_nav.html" %}
+  <div class="position-fixed" style="height: 80vh; width: 100vw; display: flex; justify-content: center; align-items: center;">
+    <div class="text-center text-bg-success p-4 rounded">
+      <h3>ثبت‌نام شما موفقیت آمیز بود.</h3>
+      <h3>برای ورود به حساب کاربری خود به صفحه ورود مراجعه فرمایید.</h3>
+    </div>
+  </div>
+{% endblock %}

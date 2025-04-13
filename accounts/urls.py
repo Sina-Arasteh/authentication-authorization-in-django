@@ -15,9 +15,9 @@ urlpatterns = [
         name="login"
     ),
     path('logout/', auth_views.LogoutView.as_view(), name="logout"),
-    path('signup-successful', views.signup_successful, name="successfulsignup"),
+    path('signup-successful/', views.signup_successful, name="successfulsignup"),
     path(
-        'password-change',
+        'password-change/',
         auth_views.PasswordChangeView.as_view(
             form_class=forms.CustomPasswordChangeForm,
             template_name="accounts/password_change_form.html",
@@ -26,7 +26,7 @@ urlpatterns = [
         name="password_change"
     ),
     path(
-        'password-change-done',
+        'password-change-done/',
         auth_views.PasswordChangeDoneView.as_view(
             template_name="accounts/password_change_done.html"
         ),

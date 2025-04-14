@@ -32,4 +32,9 @@ urlpatterns = [
         ),
         name="password_change_done"
     ),
+    path(
+        'account-type-change/',
+        views.account_type_change,
+        name="account_type_change"
+    ),
 ]

@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from . import forms
+from .models import PremiumUser
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 
 def index_page(request):
@@ -34,3 +36,16 @@ def login(request):
 
 def signup_successful(request):
     return render(request, "accounts/successful_signup.html")
+
+
+@login_required
+def account_type_change(request):
+    user = PremiumUser.objects.get(user=request.user.pk)
+    if request.method == "POST":
+        if user.is_premium:
+            user.is_premium = False
+        else:
+            user.is_premium = True
+        user.save()
+    context = {"acctype": user.is_premium}
+    return render(request, "accounts/account_type_change_form.html", context)

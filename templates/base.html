@@ -22,6 +22,16 @@
     </a>
   </div>
 
+  {% if request.user.is_authenticated %}
+    {% include "authenticateduser_nav.html" %}
+  {% else %}
+    {% include "anonymoususer_nav.html" %}
+  {% endif %}
+
   {% block body %}{% endblock %}
+
+  {% if request.user.is_authenticated %}
+    <h4 class="position-fixed text-dark" style="bottom: 4%; right: 2%;">نام کاربری: {{ request.user.username }}</h4>
+  {% endif %}
 </body>
 </html>

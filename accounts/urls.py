@@ -21,12 +21,12 @@ urlpatterns = [
         auth_views.PasswordChangeView.as_view(
             form_class=forms.CustomPasswordChangeForm,
             template_name="accounts/password_change_form.html",
-            success_url="password-change-done"
+            success_url="password-change-done/",
         ),
         name="password_change"
     ),
     path(
-        'password-change-done/',
+        'password-change/password-change-done/',
         auth_views.PasswordChangeDoneView.as_view(
             template_name="accounts/password_change_done.html"
         ),
@@ -36,5 +36,10 @@ urlpatterns = [
         'account-type-change/',
         views.account_type_change,
         name="account_type_change"
+    ),
+    path(
+        'premium-customer-club',
+        views.premium_customer_club,
+        name="premium_customer_club"
     ),
 ]

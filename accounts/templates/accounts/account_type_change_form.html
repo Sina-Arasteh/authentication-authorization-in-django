@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 
-
 {% block body %}
-  {% include "authenticateduser_nav.html" %}
-
   <form action="" method="post" novalidate>
     {% csrf_token %}
 
@@ -21,5 +18,4 @@
       </div>
     </div>
   </form>
-
 {% endblock %}

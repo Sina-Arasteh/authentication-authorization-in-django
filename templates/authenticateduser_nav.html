@@ -7,6 +7,7 @@
     <ul class="dropdown-menu bg-primary text-end">
       <li><a class="dropdown-item text-warning" href="{% url 'accounts:password_change' %}">تغییر رمز عبور</a></li>
       <li><a class="dropdown-item text-warning" href="{% url 'accounts:account_type_change' %}">تغییر نوع حساب کاربری</a></li>
+      <li><a class="dropdown-item text-warning" href="{% url 'accounts:account_delete' %}">حذف حساب کاربری</a></li>
       <li><hr class="dropdown-divider"></li>
       <li>
         <form action="{% url 'accounts:logout' %}" method="post">

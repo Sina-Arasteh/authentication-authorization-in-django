@@ -38,8 +38,13 @@ urlpatterns = [
         name="account_type_change"
     ),
     path(
-        'premium-customer-club',
+        'premium-customer-club/',
         views.premium_customer_club,
         name="premium_customer_club"
     ),
+    path(
+        'account_delete/',
+        views.account_delete,
+        name="account_delete"
+    )
 ]

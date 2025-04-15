@@ -56,6 +56,16 @@ def premium_access(user):
     u = PremiumUser.objects.get(user=user.pk)
     return u.is_premium
 
+@login_required
 @user_passes_test(premium_access)
 def premium_customer_club(request):
     return render(request, "accounts/premium_customer_club.html")
+
+@login_required
+def account_delete(request):
+    if request.method == "POST":
+        user = User.objects.get(username=request.user.username)
+        user.is_active = False
+        user.save()
+        return HttpResponseRedirect(reverse("accounts:login"))
+    return render(request, "accounts/account_delete.html")

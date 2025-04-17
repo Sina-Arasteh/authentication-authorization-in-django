@@ -10,5 +10,8 @@ class PremiumUser(models.Model):
     )
     is_premium = models.BooleanField('کاربر ویژه', default=False)
 
+    class Meta:
+        verbose_name = "نوع حساب کاربری"
+
     def __str__(self):
         return self.user.username

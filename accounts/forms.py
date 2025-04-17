@@ -6,7 +6,6 @@ from django.contrib.auth.password_validation import validate_password
 import re
 from django.contrib.auth.forms import (
     AuthenticationForm,
-    UsernameField,
     PasswordChangeForm,
 )
 
@@ -16,11 +15,6 @@ class SignUpForm(forms.Form):
         label="نام کاربری",
         max_length=150,
         min_length=4,
-        error_messages={
-            "required": "نام کاربری الزامی می‌باشد.",
-            "max_length": "نام کاربری باید حداقل 4 و حداکثر 150 کاراکتر باشد.",
-            "min_length": "نام کاربری باید حداقل 4 و حداکثر 150 کاراکتر باشد.",
-        },
         validators=[
             RegexValidator(
                 regex=r"^[\w.@+-]+\Z",
@@ -30,25 +24,15 @@ class SignUpForm(forms.Form):
         ]
     )
     email = forms.EmailField(
-        label="ایمیل",
-        error_messages={
-            "required": "ایمیل الزامی می‌باشد.",
-            "invalid": "آدرس ایمیل نامعتبر می‌باشد.",
-        }
+        label="ایمیل"
     )
     password = forms.CharField(
-        label="رمز عبور",
-        widget=forms.PasswordInput,
-        error_messages={
-            "required": "رمز عبور الزامی می‌باشد.",
-        }
+        label="گذرواژه",
+        widget=forms.PasswordInput
     )
     password_confirmation = forms.CharField(
-        label="تکرار رمز عبور",
-        widget=forms.PasswordInput,
-        error_messages={
-            "required": "تکرار رمز عبور الزامی می‌باشد.",
-        }
+        label="تکرار گذرواژه",
+        widget=forms.PasswordInput
     )
 
     username.widget.attrs.update({'class': 'form-control'})
@@ -100,49 +84,24 @@ class SignUpForm(forms.Form):
         except:
             password = None
         if password_confirmation != password:
-            raise ValidationError("رمزعبور صحیح نمی‌باشد.")
+            raise ValidationError("تکرار گذرواژه صحیح نمی‌باشد.")
         return password_confirmation
 
 
 class CustomAuthenticationForm(AuthenticationForm):
-    username = UsernameField(
-        label="نام کاربری",
-        widget=forms.TextInput(attrs={
-            "autofocus": True,
-            "class": "form-control"
-        }),
-        error_messages={"required": "نام کاربری الزامی می‌باشد."}
-    )
-    password = forms.CharField(
-        label="رمز عبور",
-        strip=False,
-        widget=forms.PasswordInput(attrs={
-            "autocomplete": "current-password",
-            "class": "form-control"
-        }),
-        error_messages={"required": "رمز عبور الزامی می‌باشد."}
-    )
-
-    error_messages = {
-        "invalid_login": "لطفاً نام کاربری و رمز عبور صحیح وارد کنید. توجه داشته باشید که هردو فیلد ممکن است به بزرگی و کوچکی حروف حساس باشند.",
-        "inactive": "این حساب کاربری غیر فعال شده است.",
-    }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({'class': 'form-control'})
+        self.fields['password'].widget.attrs.update({'class': 'form-control'})
 
 
 class CustomPasswordChangeForm(PasswordChangeForm):
-    error_messages = {
-        "password_mismatch": "تکرار رمز عبور صحیح نیست.",
-        "password_incorrect": "رمز عبور اشتباه است.",
-    }
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['old_password'].label = "رمز عبور فعلی"
-        self.fields['new_password1'].label = "رمز عبور جدید"
-        self.fields['new_password2'].label = "تکرار رمز عبور جدید"
-        self.fields['old_password'].error_messages = {"required": "این فیلد الزامی می‌باشد."}
-        self.fields['new_password1'].error_messages = {"required": "این فیلد الزامی می‌باشد."}
-        self.fields['new_password2'].error_messages = {"required": "این فیلد الزامی می‌باشد."}
+        self.fields['old_password'].label = "گذرواژه فعلی"
+        self.fields['new_password1'].label = "گذرواژه جدید"
+        self.fields['new_password2'].label = "تکرار گذرواژه جدید"
         self.fields['old_password'].widget.attrs.update({'class': 'form-control'})
         self.fields['new_password1'].widget.attrs.update({'class': 'form-control'})
         self.fields['new_password2'].widget.attrs.update({'class': 'form-control'})
+        self.error_messages["password_incorrect"] = "گذرواژه اشتباه است."

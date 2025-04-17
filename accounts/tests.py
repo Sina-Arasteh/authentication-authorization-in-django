@@ -23,7 +23,7 @@ class SignUpFormTests(TestCase):
         self.assertFormError(
             SignUpForm({}),
             "username",
-            errors="نام کاربری الزامی می‌باشد."
+            errors='این فیلد لازم است.'
         )
 
     def test_username_minimum_length(self):
@@ -129,7 +129,7 @@ class SignUpFormTests(TestCase):
                 "password": "daviddavi"
             }),
             "password",
-            errors="رمز عبور وارد شده مشابهت بالایی با شناسه کاربری یا ایمیل دارد."
+            errors='این رمز عبور بسیار شبیه نام کاربری می‌باشد.'
         )
         self.assertFormError(
             SignUpForm({
@@ -147,7 +147,7 @@ class SignUpFormTests(TestCase):
                 "password": "abcdefgh"
             }),
             "password",
-            errors="رمز عبور وارد شده جزو رمزعبورهای رایج است."
+            errors='این رمز عبور بسیار رایج است.'
         )
 
     def test_password_not_entirely_numeric(self):
@@ -157,7 +157,7 @@ class SignUpFormTests(TestCase):
                 "password": "254126968730387489752035724511456245262359895868204"
             }),
             "password",
-            errors="رمز عبور وارد شده تماماً عددی است."
+            errors='رمز شما کلا عدد است'
         )
 
 
@@ -202,4 +202,4 @@ class SignUpViewTests(TestCase):
             "password_confirmation": "ybVn7dX5}4"
         })
         self.assertTemplateUsed(response_bad, 'accounts/signup.html')
-        self.assertRedirects(response_good, reverse("accounts:login"))
+        self.assertRedirects(response_good, reverse("accounts:successfulsignup"))

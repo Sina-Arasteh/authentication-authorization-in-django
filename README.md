@@ -11,7 +11,7 @@ The aim of creating this project was to show my shkill in working with the Djang
 * Docker
 * Git
 
-## Installation
+## Installation (For Development)
 
 1. Clone the project using the following command:
 
@@ -27,12 +27,11 @@ The aim of creating this project was to show my shkill in working with the Djang
 
 ## Links:
 
-- Live Site URL: [Authentication & Authorization in Django]()
+- Live Site URL: [Authentication & Authorization in Django](https://authproj.s-arasteh.ir)
 
 ## Author
 
 Sina Arasteh
 - Email: sinna.arasteh@gmail.com
-- LinkedIn: https://www.linkedin.com/in/sina-arasteh-234085290
 - Telegram: https://t.me/Sinna_Arasteh
 
